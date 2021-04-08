@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 var cors = require('cors');
 
 // Configuration
-mongoose.connect("mongodb+srv://dbUser:DTZJth5ffSLawx-@cluster0.jzrpd.mongodb.net/NaturePoints?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://dbUser:DTZJth5ffSLawx@cluster0.jzrpd.mongodb.net/NatPoints?retryWrites=true&w=majority");
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
