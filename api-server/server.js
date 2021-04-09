@@ -47,7 +47,7 @@ app.get('/api/admin/users', function (req, res) {
 app.post('/api/users', function (req, res) {
     console.log("Creating new user...");
     Users.create({
-        email: req.body.name,
+        email: req.body.email,
         password: req.body.password,
        }, function (err, user) {
         if (err) {
