@@ -30,7 +30,7 @@ var Users = mongoose.model('Users', {
 });
 
 
-// Get all users items
+// Get all users
 app.get('/api/admin/users', function (req, res) {
     console.log("Listing all users...");
     //use mongoose to get all users in the database
@@ -43,8 +43,8 @@ app.get('/api/admin/users', function (req, res) {
     });
 });
 
-// Create a User
-app.post('/api/users', function (req, res) {
+// Create a user
+app.post('/api/admin/users', function (req, res) {
     console.log("Creating new user...");
     Users.create({
         email: req.body.email,
@@ -59,6 +59,45 @@ app.post('/api/users', function (req, res) {
                 res.send(err);
             res.json(users);
         });
+    });
+});
+
+// Delete a user
+app.delete('/api/admin/users/:id', function (req, res) {
+    console.log("Deleting user... ", req.params.id);
+    User.findOneAndRemove({  
+        _id: req.params.id
+    }, function (err, users) {
+        if (err) {
+            console.error("Error deleting user", err);
+        }
+        else {
+            User.find(function (err, users) {
+                if (err) {
+                    res.send(err);
+                }
+                else {
+                    res.json(users);
+                }
+            });
+        }
+    });
+});
+
+
+/*
+// Update a user
+app.put('/api/admin/users/:id', function (req, res) {
+    const users = {
+        email: req.body.email,
+        password: req.body.password
+    };
+    console.log("Updating user... ", req.params.id);
+    Users.update({_id: req.params.id}, users, function (err, raw) {
+        if (err) {
+            res.send(err);
+        }
+        res.send(raw);
     });
 });
 
