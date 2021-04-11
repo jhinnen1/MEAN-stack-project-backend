@@ -65,14 +65,14 @@ app.post('/api/admin/users', function (req, res) {
 // Delete a user
 app.delete('/api/admin/users/:id', function (req, res) {
     console.log("Deleting user... ", req.params.id);
-    User.findOneAndRemove({  
+    Users.findOneAndRemove({  
         _id: req.params.id
     }, function (err, users) {
         if (err) {
             console.error("Error deleting user", err);
         }
         else {
-            User.find(function (err, users) {
+            Users.find(function (err, users) {
                 if (err) {
                     res.send(err);
                 }
@@ -160,27 +160,7 @@ app.put('/api/groceries/:id', function (req, res) {
 });
 
 
-// Delete a grocery Item
-app.delete('/api/groceries/:id', function (req, res) {
-    console.log("Deleting grocery item... ", req.params.id);
-    Grocery.findOneAndRemove({   //updated from .remove - https://stackoverflow.com/questions/50283081/mongodb-error-cannot-use-retryable-writes-with-limit-0
-        _id: req.params.id
-    }, function (err, grocery) {
-        if (err) {
-            console.error("Error deleting grocery ", err);
-        }
-        else {
-            Grocery.find(function (err, groceries) {
-                if (err) {
-                    res.send(err);
-                }
-                else {
-                    res.json(groceries);
-                }
-            });
-        }
-    });
-});
+
 */
 
 // Start app and listen on port 8080  
