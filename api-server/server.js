@@ -84,6 +84,23 @@ app.delete('/api/admin/users/:id', function (req, res) {
     });
 });
 
+// Get one user
+app.get('/api/admin/users/:id', function (req, res) {
+
+    console.log("List one user...");
+    
+    //use mongoose to get a single user from the database
+    Users.find({ _id: req.params.id }, function (err, users) {
+
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err);
+        }
+
+        res.json(users); // return the user in JSON format
+    });
+});
+
 
 /*
 // Update a user
